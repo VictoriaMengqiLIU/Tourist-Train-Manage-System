@@ -1,0 +1,38 @@
+<html>
+	<h1>Tourist Train Journey Management System</h1>
+
+	<ul>
+		<li><b>Background</b></li>
+		<ol>
+			<li>A newly developed tourist area with a number of routers</li>
+			<li>Each route is served by a timetable.</li>
+			<li>Each route may be served by a number of trains.</li>
+		</ol>	
+		<li><b>Purpose</b></li>
+		<ol>
+			<li>manage the allocation of trains to journeys</li>
+			<li>tracks trains' progree along the routes</li>
+		</ol>
+		<li><b>Equipments</b></li>
+		<ol>
+			<li>[Train]: on-board screen <em>to display the next stops & times</em></li>
+			<li>[Train Stop]: sceen <em>to display the upcoming train info & train timetable</em></li>
+		</ol>
+		<li><b>Action</b></li>
+		<ol>
+			<li>[Operation Manager]: manage routes, ASSIGN <q>train</q> to <q>journey</q>, SCHEDULE train <q>timetable</q>,TRACK train <q>location</q>, REMOTELY CONTROL trains' <q>start/stop</q></li>
+			<li>[Driver]: MANUALLY CONTROL trains' <q>start/stop</q></li>
+		</ol>
+		<li><b>Functionality</b></li>
+		<ol>
+			<li>MAINTAIN <q>train info</q> and <q>driver info</q></li>
+			<li>MANAGE <q>routes</q> and <q>journeys</q></li>
+			<li>ASSIGN <q>train</q> to <q>journey</q></li>
+				<ul>if train == not_assigned ? available : not_available;</ul>
+				<ul>if train_state == available ? assigned : not_assigned</ul>
+			<li>ASSIGN <q>driver</q> to <q>train</q></li>
+				<ul>if driver == available ? assigned : not_assigned</ul>
+			<li>CHECK <q>train</q> live <q>status</q></li>
+				<ul>UPDATE <q>locations</q></ul>
+	</ul>
+</html>
