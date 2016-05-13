@@ -1,0 +1,5 @@
+line_id, bus_stop_count, bus_stop
+l1, 6, StopA StopB StopC StopD StopH StopF
+l2, 4, StopB StopJ StopM StopF
+l3, 3, StopM StopK StopF
+l4, 5, StopA StopB StopC StopD StopF
