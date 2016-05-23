@@ -10,11 +10,7 @@
 	
 ## How to run the .jar file
 
-I'll give you 2 example, and you'll see the folder under you download .zip file is **Group34**
+You can run the app by simply double-click the `app.jar` file under ./project/dist/ direction, you can see the app.jar file.
 
-	java -jar "/Users/Victoria/NetBeansProjects/Group34/dist/Group34.jar"
-	
-	java -jar "/Users/Victoria/GitHub/Tourist-Train-Manage-System/Group34/dist/Group34.jar"
-
-And please pay attentaion, you can't run the whole app by simply double-clicked the `.jar` file. (although you can still open it)
+But please don't try to compile it (I mean click it) under other directionary, it won't work. (but you may see some no data UI by doing that)
 
