@@ -230,7 +230,7 @@ public class StopLogin extends javax.swing.JFrame {
     private void rIdTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rIdTextFieldActionPerformed
         stopID = stopIdTextField.getText();
         routeID = rIdTextField.getText();
-        if (new File("./src/group34v2/data/stop/" + stopID + "/" + routeID).exists()) {
+        if (new File("./data/stop/" + stopID + "/" + routeID).exists()) {
             doInBackground();
             this.setVisible(false);
             new StopClient().setVisible(true);

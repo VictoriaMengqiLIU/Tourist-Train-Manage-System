@@ -235,7 +235,7 @@ public class TrainLogin extends javax.swing.JFrame {
         trainID = trainIdTextField.getText();
         pStop = prevStopIDTextField.getText();
         routeID = routeIdTextField.getText();
-        if (new File("./src/group34v2/data/train/" + trainID).exists()) {
+        if (new File("./data/train/" + trainID).exists()) {
             doInBackground();
             this.setVisible(false);
             new TrainClient().setVisible(true);

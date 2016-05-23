@@ -162,7 +162,7 @@ public class DelTrain extends javax.swing.JFrame {
         Checker ck = new Checker(idText.getText(), passText.getText(), 2);
         if (ck.isExists()) {
             if (!ck.isTrainAssigned()) {
-                new File("./src/group34v2/data/login/" + idText.getText() + "/").delete();
+                new File("./data/login/" + idText.getText() + "/").delete();
                 this.setVisible(false);
                 dispose();
                 new Feedback().setVisible(true);

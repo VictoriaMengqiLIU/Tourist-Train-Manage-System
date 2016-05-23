@@ -44,7 +44,7 @@ public class RouteHelper
         {
             for (String s : stops)
             {
-                new File("./src/group34v2/data/stop/" + s + "/" + routeID).delete();
+                new File("./data/stop/" + s + "/" + routeID).delete();
             }
         }
         catch (Exception e)

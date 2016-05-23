@@ -306,7 +306,7 @@ public class StopClient extends javax.swing.JFrame {
             nStop = info.get(2);
             tDiff = info.get(3);
         }
-        new File("./src/group34v2/data/stop_tmp/" + stopID).delete();
+        new File("./data/stop_tmp/" + stopID).delete();
     }
     
     public String getStopID() { return stopID; }

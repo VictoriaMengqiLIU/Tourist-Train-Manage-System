@@ -188,9 +188,9 @@ public class DelRoute extends javax.swing.JFrame {
                 
                 if(!ck.isRouteEmpty())
                 {
-                    new File("./src/group34v2/data/route/" + idText.getText()).delete();
+                    new File("./data/route/" + idText.getText()).delete();
                 }
-                new File("./src/group34v2/data/login/" + idText.getText()).delete();
+                new File("./data/login/" + idText.getText()).delete();
                 new RouteHelper(idText.getText(), stops).deleteStops();
             }
             else

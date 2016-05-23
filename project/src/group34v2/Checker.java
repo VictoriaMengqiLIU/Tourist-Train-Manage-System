@@ -51,7 +51,7 @@ public class Checker
     public boolean isDriverAssigned()
     {
         Driver d;
-        if (new File("./src/group34v2/data/driver/" + usrID).exists())
+        if (new File("./data/driver/" + usrID).exists())
             return true;
         else
             return false;
@@ -60,7 +60,7 @@ public class Checker
     public boolean isTrainAssigned()
     {
         Train t;
-        if (new File("./src/group34v2/data/train/" + usrID).exists())
+        if (new File("./data/train/" + usrID).exists())
             return true;
         else
             return false;
@@ -69,7 +69,7 @@ public class Checker
     public boolean isRouteEmpty()
     {
         Route r;
-        if (new File("./src/group34v2/data/route/" + usrID).exists())
+        if (new File("./data/route/" + usrID).exists())
             return false;
         else
             return true;

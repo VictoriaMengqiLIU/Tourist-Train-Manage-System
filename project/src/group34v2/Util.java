@@ -17,7 +17,7 @@ public class Util {
     private String root;
     
     public Util() {
-        this.root = "./src/group34v2/data";
+        this.root = "./data";
     }
     
     public Util(String root) {

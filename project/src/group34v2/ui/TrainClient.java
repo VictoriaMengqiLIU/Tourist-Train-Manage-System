@@ -170,7 +170,7 @@ public class TrainClient extends javax.swing.JFrame {
             nStop = info.get(1);
             tDiff = info.get(2);
         }
-        new File("./src/group34v2/data/train_tmp/" + trainID).delete();
+        new File("./data/train_tmp/" + trainID).delete();
     }
     
     public String getTrainID() { return trainID; }
