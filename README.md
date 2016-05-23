@@ -1,6 +1,6 @@
 # Tourist-Train-Management-System
 
-### Author: Victoria Mengqi LIU
+###### Author: Victoria Mengqi LIU
 
 ## Java Version
 
