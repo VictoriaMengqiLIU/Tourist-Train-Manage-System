@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 
-import group34v2.Train;
-import group34v2.Util;
+import code.Train;
+import code.Util;
 import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -43,7 +43,7 @@ public class TrainTest {
     // The methods must be annotated with annotation @Test. For example:
     //
     @Test
-    public void hello() {
+    public void test() {
         try
          {
              String tid = "t00001";
@@ -81,7 +81,8 @@ public class TrainTest {
              Train t00002 = new Train(tid2, rid2, stops2, times2, false);
              Train t00003 = new Train("t00004", rid3, stops3, times3, false);
              
-             new Util().writeObject("/train/" + tid, t00001);
+//             route1 = new Util().readObject("/route/r00001")
+             new Util().writeObject("/train/t00001", new Train("t00001", "r00001", stops, times, true));
              new Util().writeObject("/train/" + tid2, t00002);
              new Util().writeObject("/train/" + tid3, t00003);
          } 

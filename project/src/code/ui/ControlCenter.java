@@ -1,7 +1,9 @@
-package group34v2.ui;
+package code.ui;
 
-import group34v2.Util;
+import code.Util;
 import java.util.ArrayList;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,7 +21,7 @@ public class ControlCenter extends javax.swing.JFrame {
      * Creates new form ControlCenter
      */
     public ControlCenter() {
-        setText("");
+        setText();
         initComponents();
     }
 
@@ -298,88 +300,97 @@ public class ControlCenter extends javax.swing.JFrame {
     private void ckTrainBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckTrainBtnActionPerformed
 //        this.setVisible(false);
         new TrainInfo().setVisible(true);
+        setText();
     }//GEN-LAST:event_ckTrainBtnActionPerformed
 
     private void ckDriverBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckDriverBtnActionPerformed
 //        this.setVisible(false);
         new DriverInfo().setVisible(true);
+        setText();
     }//GEN-LAST:event_ckDriverBtnActionPerformed
 
     private void ckRouteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckRouteBtnActionPerformed
 //        this.setVisible(false);
         new RouteInfo().setVisible(true);
+        setText();
     }//GEN-LAST:event_ckRouteBtnActionPerformed
 
     private void addRouteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRouteBtnActionPerformed
         this.setVisible(false);
         dispose();
         new AddRoute().setVisible(true);
+        setText();
     }//GEN-LAST:event_addRouteBtnActionPerformed
 
     private void delRouteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delRouteBtnActionPerformed
         this.setVisible(false);
         dispose();
         new DelRoute().setVisible(true);
+        setText();
     }//GEN-LAST:event_delRouteBtnActionPerformed
 
     private void addTrainBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTrainBtnActionPerformed
         this.setVisible(false);
         dispose();
         new AddTrain().setVisible(true);
+        setText();
     }//GEN-LAST:event_addTrainBtnActionPerformed
 
     private void addDriverBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDriverBtnActionPerformed
         this.setVisible(false);
         dispose();
         new AddDriver().setVisible(true);
+        setText();
     }//GEN-LAST:event_addDriverBtnActionPerformed
 
     private void delDriverBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delDriverBtnActionPerformed
         this.setVisible(false);
         dispose();
         new DelDriver().setVisible(true);
+        setText();
     }//GEN-LAST:event_delDriverBtnActionPerformed
 
     private void stopTrainBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopTrainBtnActionPerformed
         this.setVisible(false);
         dispose();
         new StopTrain().setVisible(true);
+        setText();
     }//GEN-LAST:event_stopTrainBtnActionPerformed
 
     private void startTrainBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startTrainBtnActionPerformed
         this.setVisible(false);
         dispose();
         new StartTrain().setVisible(true);
+        setText();
     }//GEN-LAST:event_startTrainBtnActionPerformed
 
     private void assignDriverBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignDriverBtnActionPerformed
         this.setVisible(false);
         dispose();
         new AssignDriver().setVisible(true);
+        setText();
     }//GEN-LAST:event_assignDriverBtnActionPerformed
 
     private void assignTrainBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignTrainBtnActionPerformed
         this.setVisible(false);
         dispose();
         new AssignTrain().setVisible(true);
+        setText();
     }//GEN-LAST:event_assignTrainBtnActionPerformed
 
     private void delTrainBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delTrainBtnActionPerformed
         this.setVisible(false);
         dispose();
         new DelTrain().setVisible(true);
+        setText();
     }//GEN-LAST:event_delTrainBtnActionPerformed
     
-    public void setText(String value)
-    {
-        ArrayList list = new Util().getObj("/driver/");
-        
-        for (Object obj : list)
+    public void setText()
+    {        
+        for (Object obj : new Util().getObj("/driver/"))
         {
-            value = value + obj + "\n";
-        }
-        
-        text = value;
+            text = text + obj + "\n";
+        }        
     }
     
     private String text = "";

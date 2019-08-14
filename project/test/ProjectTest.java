@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 
-import group34v2.Checker;
-import group34v2.Login;
-import group34v2.Stop;
-import group34v2.TimeHelper;
-import group34v2.Train;
-import group34v2.Util;
+import code.Checker;
+import code.Login;
+import code.Stop;
+import code.TimeHelper;
+import code.Train;
+import code.Util;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,9 +25,9 @@ import static org.junit.Assert.*;
  *
  * @author Victoria
  */
-public class Group34V2Test {
+public class ProjectTest {
     
-    public Group34V2Test() {
+    public ProjectTest() {
     }
     
     @BeforeClass
@@ -46,9 +46,6 @@ public class Group34V2Test {
     public void tearDown() {
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    // 不用看这里,闲七杂八的test
     @Test
     public void hello() {
 //        String un = "route";
@@ -84,11 +81,11 @@ public class Group34V2Test {
             String now = d.toString();
             if ( (idx+1) < s.getStops().size()) {
                 nStop = s.getStops().get(idx+1);
-                tDiff = TimeHelper.calcTimeDiff(s.getTimes().get(idx),
+                tDiff = new TimeHelper().calcTimeDiff(s.getTimes().get(idx),
                         s.getTimes().get(idx+1));
             } else {
                 nStop = "N/A";
-                tDiff = TimeHelper.calcTimeDiff(s.getTimes().get(idx-1),
+                tDiff = new TimeHelper().calcTimeDiff(s.getTimes().get(idx-1),
                         s.getTimes().get(idx));
             }
         }

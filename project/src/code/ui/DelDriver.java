@@ -3,10 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package group34v2.ui;
+package code.ui;
 
-import group34v2.Checker;
+import code.Checker;
+import code.Communicator;
+import code.Driver;
+import code.Train;
+import code.Util;
 import java.io.File;
+import java.nio.file.Paths;
 
 /**
  *
@@ -159,15 +164,20 @@ public class DelDriver extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
-        Checker ck = new Checker(idText.getText(), passText.getText(), 2);
+        String did = idText.getText();
+        String dpass = passText.getText();
+        Checker ck = new Checker(did, dpass);
         if (ck.isExists()) {
-            if (!ck.isDriverAssigned()) {
-                new File("./data/login/" + idText.getText() + "/").delete();
+            if ((!ck.isDriverAssigned2Train()) || (ck.isDriverAssigned2Train() && !ck.isDriverDriving())) {
+                new File(root+"/login/" + did).delete();
+                if (ck.isDriverAssigned2Train()) {
+                    new Communicator().untieDriverTrain(did);
+                }
                 this.setVisible(false);
                 dispose();
                 new Feedback().setVisible(true);
             } else {
-                feedbackLabel.setText("Driver is assigned! You cannot delete it!");
+                feedbackLabel.setText("Driver is driving! You cannot delete it!");
                 idText.setText("");
                 passText.setText("");
             }
@@ -233,4 +243,8 @@ public class DelDriver extends javax.swing.JFrame {
     private javax.swing.JTextField passText;
     private javax.swing.JButton submitBtn;
     // End of variables declaration//GEN-END:variables
+    private String wd = Paths.get("").toAbsolutePath().toString().substring(0, 
+            Paths.get("").toAbsolutePath().toString().indexOf("Tourist-Train-Manage-System"));
+    private String root = wd + "Tourist-Train-Manage-System/project/data";
+
 }

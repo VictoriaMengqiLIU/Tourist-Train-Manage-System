@@ -3,8 +3,8 @@
  * and open the template in the editor.
  */
 
-import group34v2.Stop;
-import group34v2.Util;
+import code.Stop;
+import code.Util;
 import java.io.File;
 import java.util.ArrayList;
 import org.junit.After;

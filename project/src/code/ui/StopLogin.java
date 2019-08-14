@@ -1,10 +1,11 @@
-package group34v2.ui;
+package code.ui;
 
-import group34v2.Checker;
-import group34v2.Stop;
-import group34v2.TimeHelper;
-import group34v2.Util;
+import code.Checker;
+import code.Stop;
+import code.TimeHelper;
+import code.Util;
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -230,12 +231,12 @@ public class StopLogin extends javax.swing.JFrame {
     private void rIdTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rIdTextFieldActionPerformed
         stopID = stopIdTextField.getText();
         routeID = rIdTextField.getText();
-        if (new File("./data/stop/" + stopID + "/" + routeID).exists()) {
+        if (new File(root+"/stop/" + stopID + "/" + routeID).exists()) {
             doInBackground();
             this.setVisible(false);
-            new StopClient().setVisible(true);
+            new StopClient(stopID, routeID, nStop, tDiff).setVisible(true);
         } else {
-            feedbackLabel.setText("Stop doesn't exists!");
+            feedbackLabel.setText("Stop/Route doesn't exists!");
             stopIdTextField.setText("");
         }
     }//GEN-LAST:event_rIdTextFieldActionPerformed
@@ -253,19 +254,14 @@ public class StopLogin extends javax.swing.JFrame {
             String now = d.toString();
             if ( (idx+1) < s.getStops().size()) {
                 nStop = s.getStops().get(idx+1);
-                tDiff = TimeHelper.calcTimeDiff(s.getTimes().get(idx),
+                tDiff = new TimeHelper().calcTimeDiff(s.getTimes().get(idx),
                         s.getTimes().get(idx+1));
             } else {
                 nStop = "N/A";
-                tDiff = TimeHelper.calcTimeDiff(s.getTimes().get(idx-1),
+                tDiff = new TimeHelper().calcTimeDiff(s.getTimes().get((idx>0)?idx-1:idx),
                         s.getTimes().get(idx));
             }
         }
-        cliInfo.add(stopID);
-        cliInfo.add(routeID);
-        cliInfo.add(nStop);
-        cliInfo.add(tDiff);
-        new Util().writeObject("/stop_tmp/" + stopID, cliInfo);
     }
     
     public String getStopID() { return stopID; }
@@ -282,7 +278,6 @@ public class StopLogin extends javax.swing.JFrame {
     private String routeID = "";
     private String nStop = "";
     private String tDiff = "";
-    private ArrayList<String> cliInfo = new ArrayList<String>();
     
     /**
      * @param args the command line arguments
@@ -336,4 +331,7 @@ public class StopLogin extends javax.swing.JFrame {
     private javax.swing.JTextField stopIdTextField;
     private javax.swing.JPanel usrPanel;
     // End of variables declaration//GEN-END:variables
+    private String wd = Paths.get("").toAbsolutePath().toString().substring(0, 
+            Paths.get("").toAbsolutePath().toString().indexOf("Tourist-Train-Manage-System"));
+    private String root = wd + "Tourist-Train-Manage-System/project/data";
 }

@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package group34v2.ui;
+package code.ui;
 
-import group34v2.Checker;
+import code.Checker;
 import java.util.Objects;
 
 /**
@@ -221,7 +221,7 @@ public class ManagerLogin extends javax.swing.JFrame {
         String un = usrnameTextField.getText();
         String pa = passwordTextField.getText();
         
-        if (new Checker(un, pa, 0).isExists())
+        if ((un.startsWith("m") || un.equals("root")) && new Checker(un, pa).isExists())
         {
             this.setVisible(false);
             new ControlCenter().setVisible(true);

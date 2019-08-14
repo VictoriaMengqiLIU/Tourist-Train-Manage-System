@@ -4,8 +4,9 @@
  * and open the template in the editor.
  */
 
-import group34v2.Login;
-import group34v2.Util;
+import code.Checker;
+import code.Login;
+import code.Util;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -45,30 +46,11 @@ public class LoginTest {
     public void hello() {
         try
         {
-            String u1 = "root";
-            String p1 = "root";
-            int state = 0;
-            
-            String u2 = "s00001";
-            String u3 = "s00002";
-            String u4 = "s00003";
-            String u5 = "s00004";
-            
-            String u6 = "t00001";
-            String u7 = "t00002";
-            String u8 = "t00003";
-            
-            String u9 = "r00001";
-            String u10 = "r00002";
-            String u11 = "r00003";
-            String u12 = "j00001";
-            String u13 = "j00002";
-            String u14 = "j00003";
-            
-            
-//            Login root = new Login(u1, p1, state);
-            new Util().writeObject("/login/" + u11, new Login(u11,u11,3));
-            System.out.println(new Util().readObject("/login/" + "r00001"));
+//            new Util().writeObject("/login/root", new Login("root","root",0));
+//            new Util().writeObject("/login/m00001", new Login("m00001","m00001",1));
+            System.out.println(new Checker("t00002","t00002").isExists());
+            System.out.println(new Checker("d00001","d00001").isExists());
+//            System.out.println(new Util().readObject("/login/m00001"));
         }
         catch (Exception e)
         {

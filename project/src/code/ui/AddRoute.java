@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package group34v2.ui;
+package code.ui;
 
-import group34v2.Login;
-import group34v2.Route;
-import group34v2.RouteHelper;
-import group34v2.Util;
+import code.Login;
+import code.Route;
+import code.RouteHelper;
+import code.Util;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -218,13 +219,11 @@ public class AddRoute extends javax.swing.JFrame {
         String id = idText.getText();
         String pass = passText.getText();
         ArrayList<String> stops = new ArrayList<String>();
-        for (String s : stopTextArea.getText().split(" ")) { stops.add(s); }
+        stops.addAll(Arrays.asList(stopTextArea.getText().split(" ")));
         ArrayList<String> times = new ArrayList<String>();
-        for (String t : timeTextArea.getText().split(" ")) { times.add(t); }
-        try
-        {
-            new Util().writeObject("/login/" + id, new Login(id,pass,3));
-            new Util().writeObject("/route/" + id, new Route(id, stops, times, false));
+        times.addAll(Arrays.asList(timeTextArea.getText().split(" ")));
+        try {
+            new Util().writeObject("/route/" + id, new Route(id, stops, times));
             new RouteHelper(id, stops, times).updateStops();
         }
         catch (Exception e)

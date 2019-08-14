@@ -4,9 +4,23 @@
  * and open the template in the editor.
  */
 
-import group34v2.TimeHelper;
+import code.Route;
+import code.TimeHelper;
+import code.TrainHelper;
+import code.Util;
+import java.math.BigInteger;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import static java.time.temporal.ChronoUnit.MINUTES;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -43,9 +57,19 @@ public class TimeHelperTest {
     // The methods must be annotated with annotation @Test. For example:
     //
      @Test
-     public void hello() {
-         TimeHelper t = new TimeHelper();
-         System.out.println(new TimeHelper().calcTimeSimple("09:25:00", "09:17:00"));
-         System.out.println(new TimeHelper().calcTimeDiff("09:17:00", "09:25:00"));
+     public void test() {
+         LocalTime now = LocalTime.now();
+//         Duration d = Duration.between(LocalTime.parse("08:20:00"), now);
+//         System.out.println(new TimeHelper().calcTimeDiff("08:20:00","08:34:00"));
+//         System.out.println(now);
+//         System.out.println(LocalTime.parse("08:20:00").plusMinutes(d.toMinutes()));
+//         Route obj = (Route) new Util().readObject("/route/r00001");
+//         System.out.println(obj.getTimes());
+//         System.out.println(new TimeHelper().translationTime(obj.getTimes()));
+         System.out.println(Duration.between(now, now).toMillis());
+         System.out.println(now.isBefore(now.plusSeconds(10)));
+         System.out.println(Duration.between(now, now.plusSeconds(10)).toMillis());
+         System.out.println(new TimeHelper().calcDelay("19:59:00"));
      }
 }
+

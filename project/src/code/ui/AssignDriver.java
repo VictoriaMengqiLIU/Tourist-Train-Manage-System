@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package group34v2.ui;
+package code.ui;
 
-import group34v2.Checker;
-import group34v2.Driver;
-import group34v2.Util;
+import code.Checker;
+import code.Communicator;
 
 /**
  *
@@ -174,20 +173,40 @@ public class AssignDriver extends javax.swing.JFrame {
         String did = didText.getText();
         String tid = tidText.getText();
         String rid = ridText.getText();
-        Checker c1 = new Checker(did, did);
-        Checker c2 = new Checker(tid, tid);
+        Checker driver = new Checker(did, new Communicator().getPass(did));
+        Checker train = new Checker(tid, new Communicator().getPass(tid));
+        Checker route = new Checker(rid);
         
-        if (c1.isExists() && c2.isExists())
-        {
-            if ((!c1.isDriverAssigned()) && (!c2.isTrainAssigned()))
-            {
-               Driver d = new Driver(did, tid, rid, false);
-               new Util().writeObject("/driver/"+did, d);
-               this.setVisible(false);
-                dispose();
-                new Feedback().setVisible(true);
+        if (driver.isExists() && train.isExists() && route.isRouteInitiated()) {
+            if (driver.isDriverAssigned2Train()) {
+                feedbackLabel.setText("Driver already been assigned!");
             } else {
-                feedbackLabel.setText("Driver/Train/Route already been assigned!");
+                if (train.isTrainAssigned2Route()) {
+                    // Train has driver
+                    if (train.isTrainDrived()) {
+                        feedbackLabel.setText("Train has been assigned to other driver!");
+                    } 
+                    //Train do not have driver
+                    else {
+                        // Train is assigned to target route
+                        if (new Communicator().assignDriver2Train(did, tid, rid)) {
+                            this.setVisible(false);
+                            dispose();
+                            new Feedback().setVisible(true);
+                        } else {
+                            // Train is assigned to other route
+                            feedbackLabel.setText("Train has been assigned to other route!");
+                        }
+                    }
+                }
+                // Train is not assigned to other route
+                else {
+                    new Communicator().assignTrain2Route(tid, rid);
+                    new Communicator().assignDriver2Train(did, tid, rid);
+                    this.setVisible(false);
+                    dispose();
+                    new Feedback().setVisible(true);                
+                }
             }
         } else {
             feedbackLabel.setText("Driver/Train/Route doesn't exists!");

@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package group34v2.ui;
+package code.ui;
 
-import group34v2.Util;
+import code.Train;
+import code.Util;
 import java.util.ArrayList;
 
 /**
@@ -125,14 +126,11 @@ public class TrainInfo extends javax.swing.JFrame {
 
     private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
         this.setVisible(false);
-        //        new StopClient().setVisible(true);
     }//GEN-LAST:event_closeButtonActionPerformed
 
-    public void setsomeText() {
-        ArrayList list = new Util().getObj("/train/");
-        
-        for (Object sub : list){
-            text = text + sub.toString() + "\n";
+    public void setsomeText() {        
+        for (Object obj : new Util().getObj("/train/")){
+            text = text + obj + "\n";
         }
     }
     

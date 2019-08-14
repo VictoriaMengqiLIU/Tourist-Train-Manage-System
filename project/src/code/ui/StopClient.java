@@ -1,11 +1,9 @@
-package group34v2.ui;
+package code.ui;
 
-import group34v2.Stop;
-import group34v2.TimeHelper;
-import group34v2.Util;
+import code.Util;
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Date;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -22,8 +20,11 @@ public class StopClient extends javax.swing.JFrame {
     /**
      * Creates new form StopClient
      */
-    public StopClient() {
-        doInBackground();
+    public StopClient(String stopID, String routeID, String nStop, String tDiff) {
+        this.stopID = stopID;
+        this.routeID = routeID;
+        this.nStop = nStop;
+        this.tDiff = tDiff;
         initComponents();
     }
 
@@ -242,72 +243,6 @@ public class StopClient extends javax.swing.JFrame {
 //        this.setVisible(false);
         new RouteInfo().setVisible(true);
     }//GEN-LAST:event_routeInfoBtnActionPerformed
-
-//    算法做的不太好,后期改进吧,先用笨方法完成
-//    public void doInBackground()
-//    {
-//        Stop s;
-//        ArrayList<String> timeheap = new ArrayList<String>();
-//        for(Object obj : new Util().getObj("/stop/" + stopID + "/"))
-//        {
-//            s = (Stop) obj;
-//            int idx = s.getStops().indexOf(stopID);
-//            if (idx+1 < s.getStops().size())
-//                timeheap.add(s.getTimes().get(idx+1));
-//            else
-//                continue;
-//        }
-//        
-//        int len = timeheap.size();
-//        int i = 0;
-//        
-//        while (timeheap.size() > 1)
-//        {
-//            if ( TimeHelper.calcTimeSimple(new Date().toString(), timeheap.get(i))
-//                    && TimeHelper.calcTimeSimple(new Date().toString(), timeheap.get(i+1)))
-//            {
-//                if ( TimeHelper.calcTimeSimple(timeheap.get(i), timeheap.get(i+1))) {
-//                    timeheap.remove(i+1);
-//                } else {
-//                    timeheap.remove(i);
-//                }
-//            }
-//            else if ( TimeHelper.calcTimeSimple(new Date().toString(), timeheap.get(i)))
-//            {
-//                timeheap.remove(i+1);
-//            }
-//            else if ( TimeHelper.calcTimeSimple(new Date().toString(), timeheap.get(i+1)))
-//            {
-//                timeheap.remove(i);
-//            }
-//        }
-//        
-//        setTimeDiff(timeheap.get(0));
-//        
-//        for(Object obj : new Util().getObj("/stop/" + stopID + "/"))
-//        {
-//            s = (Stop) obj;
-//            int idx = s.getStops().indexOf(stopID);
-//            if ((idx+1) < s.getStops().size())
-//                if (s.getTimes().get(idx+1) == tDiff)
-//                    setNextStop(s.getStops().get(idx+1));
-//                    setRouteID(s.getRouteID());
-//        }
-//    }
-    
-    public void doInBackground()
-    {
-        ArrayList<String> info = new ArrayList<String>();
-        for (Object obj : new Util().getObj("/stop_tmp/"))
-        {
-            info = (ArrayList) obj;
-            stopID = info.get(0);
-            routeID = info.get(1);
-            nStop = info.get(2);
-            tDiff = info.get(3);
-        }
-        new File("./data/stop_tmp/" + stopID).delete();
-    }
     
     public String getStopID() { return stopID; }
     public String getRouteID() { return routeID; }
@@ -323,42 +258,6 @@ public class StopClient extends javax.swing.JFrame {
     private String routeID = null;
     private String nStop = null;
     private String tDiff = null;
-    
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StopClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StopClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StopClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StopClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new StopClient().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
@@ -380,4 +279,7 @@ public class StopClient extends javax.swing.JFrame {
     private javax.swing.JLabel trainLabel;
     private javax.swing.JLabel unitLabel;
     // End of variables declaration//GEN-END:variables
+    private String wd = Paths.get("").toAbsolutePath().toString().substring(0, 
+            Paths.get("").toAbsolutePath().toString().indexOf("Tourist-Train-Manage-System"));
+    private String root = wd + "Tourist-Train-Manage-System/project/data";
 }

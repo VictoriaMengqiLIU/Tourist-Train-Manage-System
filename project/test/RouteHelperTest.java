@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 
-import group34v2.RouteHelper;
-import group34v2.Util;
+import code.RouteHelper;
+import code.Util;
 import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;

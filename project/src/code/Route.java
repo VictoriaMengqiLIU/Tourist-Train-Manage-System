@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package group34v2;
+package code;
 
 import java.util.ArrayList;
 
@@ -16,33 +16,40 @@ public class Route
 
 
 {
-    public Route(String rid, ArrayList<String> stops, ArrayList<String> times, boolean s)
+    public Route(String rid, ArrayList<String> stops, ArrayList<String> times)
     {
-        routeID = rid; this.stops = stops; this.times = times; state = s;
+        routeID = rid; this.stops = stops; this.times = times;
+    }
+    
+    public void addTrain(String tid) {
+        trains.add(tid);
+    }
+    
+    public void removeTrain(String tid) {
+        trains.remove(tid);
     }
     
     public String getRouteID() { return routeID; }
     public ArrayList<String> getStops() { return stops; }
     public ArrayList<String> getTimes() { return times; }  
-    public boolean getState() { return state; }
+    public ArrayList<String> getTrains() { return trains; }  
     
     public void setRouteID(String value) { routeID = value; }
     public void setStops(ArrayList<String> value) { stops = value; }
     public void setTimes(ArrayList<String> value) { times = value; }
-    public void setState(boolean value) { state = value; }
+    public void setTrains(ArrayList<String> value) { trains = value; }
     
     public String toString()
     {
         return "[Route: " + routeID + "\n\t" +
                 " Stops: " + stops.toString() + "\n\t" +
                 " TimeTable: " + times.toString() + "\n\t" +
-                " haveTrainRunning? " + state +
+                " Assigned Trains: " + trains.toString() +
                 "]";
     }
     
     private String routeID = null;
     private ArrayList<String> stops = new ArrayList<String>();
     private ArrayList<String> times = new ArrayList<String>();
-    private boolean state = false;      // FLASE表示该线路上没有车
-    
+    private ArrayList<String> trains = new ArrayList<String>();
 }

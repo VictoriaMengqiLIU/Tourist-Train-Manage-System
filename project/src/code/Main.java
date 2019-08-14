@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package group34v2;
+package code;
 
-import group34v2.ui.Home;
+import code.ui.Home;
 
 /**
  *

@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package group34v2.ui;
+package code.ui;
 
-import group34v2.Checker;
-import group34v2.Route;
-import group34v2.RouteHelper;
-import group34v2.TimeHelper;
-import group34v2.Util;
+import code.Checker;
+import code.Route;
+import code.RouteHelper;
+import code.TimeHelper;
+import code.Util;
 import java.io.File;
+import java.nio.file.Paths;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -165,37 +167,28 @@ public class DelRoute extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
-        
-        if ((new TimeHelper().calcTimeSimple(new Date().toString(), "06:00:00") 
-                && (new TimeHelper().calcTimeSimple("23:00:00", new Date().toString()))))
-        {
-            feedbackLabel.setText("YOU CAN'T DELET ROUTE ON DAY-TIME! IT'S REISKY!");
+        if (LocalTime.now().isAfter(LocalTime.parse("06:00:00")) 
+                && LocalTime.now().isBefore(LocalTime.parse("23:00:00"))) {
+            feedbackLabel.setText("YOU CAN'T DELET ROUTE ON DAY-TIME! IT'S RISKY!");
             idText.setText("");
             passText.setText("");
-        }
-        else
-        {
-            Checker ck = new Checker(idText.getText(), passText.getText(), 3);
-            if(ck.isExists())
-            {
-                Route r;
-                ArrayList<String> stops = new ArrayList<String>();
-                for (Object obj : new Util().getObj("/route/"+idText.getText()))
-                {
-                    r = (Route) obj;
-                    stops = r.getStops();
+        } else {
+            Checker ck = new Checker(idText.getText(), passText.getText());
+            if(ck.isRouteInitiated()) {
+                if (!ck.isRouteHasTrain()) {
+                    Route r = (Route) new Util().readObject("/route/"+idText.getText());
+                    new File(root+"/route/" + idText.getText()).delete();
+                    new RouteHelper(idText.getText(), r.getStops()).deleteStops();
+                    this.setVisible(false);
+                    dispose();
+                    new Feedback().setVisible(true);
+                } else {
+                    feedbackLabel.setText("Trains on Route! You cannot delete it!");
+                    idText.setText("");
+                    passText.setText("");                    
                 }
-                
-                if(!ck.isRouteEmpty())
-                {
-                    new File("./data/route/" + idText.getText()).delete();
-                }
-                new File("./data/login/" + idText.getText()).delete();
-                new RouteHelper(idText.getText(), stops).deleteStops();
-            }
-            else
-            {
-                feedbackLabel.setText("Train does not exist! You cannot delete it!");
+            } else {
+                feedbackLabel.setText("Route doesn't exist! You cannot delete it!");
                 idText.setText("");
                 passText.setText("");
             }
@@ -258,4 +251,7 @@ public class DelRoute extends javax.swing.JFrame {
     private javax.swing.JTextField passText;
     private javax.swing.JButton submitBtn;
     // End of variables declaration//GEN-END:variables
+    private String wd = Paths.get("").toAbsolutePath().toString().substring(0, 
+            Paths.get("").toAbsolutePath().toString().indexOf("Tourist-Train-Manage-System"));
+    private String root = wd + "Tourist-Train-Manage-System/project/data";
 }

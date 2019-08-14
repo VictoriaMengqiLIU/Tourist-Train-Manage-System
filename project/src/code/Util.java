@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package group34v2;
+package code;
 
 import java.io.*;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
@@ -15,9 +16,12 @@ import java.util.ArrayList;
 public class Util {
     
     private String root;
+    private String wd;
     
     public Util() {
-        this.root = "./data";
+        this.wd = Paths.get("").toAbsolutePath().toString().substring(0, 
+                Paths.get("").toAbsolutePath().toString().indexOf("Tourist-Train-Manage-System"));
+        this.root = this.wd + "Tourist-Train-Manage-System/project/data";
     }
     
     public Util(String root) {
@@ -69,18 +73,13 @@ public class Util {
     public ArrayList getObj(String dir) {
         dir = root + dir;
         File f = new File(dir);
-        File[] fs = f.listFiles();
+        File[] fs = f.listFiles((File file) -> !file.isHidden());
         ArrayList<Object> obj = new ArrayList<Object>();
         
         try {
-            int i = 0;
             for (File tmp : fs) {
-                if (i != 0)
-                {
-                    String path = tmp.getPath();
-                    obj.add(readObj(path));
-                }
-                i++;
+                String path = tmp.getPath();
+                obj.add(readObj(path));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -88,7 +87,7 @@ public class Util {
         return obj;
     }
     
-    public void addObj (String dir, String sub, Serializable obj) {
+    public void addObj(String dir, String sub, Serializable obj) {
         
         try {
             

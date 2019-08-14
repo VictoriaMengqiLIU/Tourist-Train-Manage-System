@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 
-import group34v2.Route;
-import group34v2.Util;
+import code.Route;
+import code.Util;
 import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -47,16 +47,21 @@ public class UtilTest {
     
     @Test
     public void test() {
-//        ArrayList<String> test = new Util().getObj("/stop/" + "s00001/");
-//        for(String t : test){
-//            System.out.println(t);
-//        }
-
-//        System.out.println(new Util().getObj("/stop/" + "s00002/"));
-        System.out.println("getObj len" + new Util().getObj("/stop/s00001").size());
-        for (Object obj : new Util().getObj("/stop/s00001"))
-        {
-            System.out.println(obj + "\n");
+        Route route = (Route) new Util().readObject("/route/r00001");
+        ArrayList<String> stops = route.getStops();
+        System.out.println("getObj len: " + stops.size());
+        for (String s : stops) {
+            System.out.println(stops.indexOf(s));
         }
+        System.out.println(stops.indexOf("s00003")+1==stops.size());
+        System.out.println(stops.subList(1, stops.size()));
+        ArrayList<String> newStops = new ArrayList<String>(stops.subList(1, stops.size()));
+        System.out.println(newStops);
+        
+//        System.out.println("getObj len" + new Util().getObj("/stop/s00001").size());
+//        for (Object obj : new Util().getObj("/stop/s00001"))
+//        {
+//            System.out.println(obj + "\n");
+//        }
     }
 }

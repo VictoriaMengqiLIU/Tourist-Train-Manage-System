@@ -1,10 +1,12 @@
-package group34v2.ui;
+package code.ui;
 
-import group34v2.Stop;
-import group34v2.TimeHelper;
-import group34v2.Train;
-import group34v2.Util;
+import code.Checker;
+import code.Stop;
+import code.TimeHelper;
+import code.Train;
+import code.Util;
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -235,10 +237,10 @@ public class TrainLogin extends javax.swing.JFrame {
         trainID = trainIdTextField.getText();
         pStop = prevStopIDTextField.getText();
         routeID = routeIdTextField.getText();
-        if (new File("./data/train/" + trainID).exists()) {
+        if (new Checker(trainID).isTrainAssigned2Route()) {
             doInBackground();
             this.setVisible(false);
-            new TrainClient().setVisible(true);
+            new TrainClient(trainID, nStop, tDiff).setVisible(true);
         } else {
             feedbackLabel.setText("Train doesn't exists!");
             trainIdTextField.setText("");
@@ -256,34 +258,14 @@ public class TrainLogin extends javax.swing.JFrame {
     {
         trainID = getTrainID();
         routeID = getRouteID();
-        Train t;
-        Object obj = new Util().readObject("/train/"+trainID);
-        
-        t = (Train) obj;
-        int idx = 0;
-        for (String stop : t.getStops())
-        {
-            if (stop == pStop) { idx = t.getStops().indexOf(pStop); }
-        }
-        Date d = new Date();
-        String now = d.toString();
-        if ( (idx+1) < t.getStops().size()) 
-        {
-            nStop = t.getStops().get(idx+1);
-            tDiff = TimeHelper.calcTimeDiff(t.getTimes().get(idx),
-                        t.getTimes().get(idx+1));
-        } 
-        else 
-        {
-            nStop = "N/A";
-            tDiff = TimeHelper.calcTimeDiff(t.getTimes().get(idx-1),
-                        t.getTimes().get(idx));
-        }
-        
-        cliInfo.add(trainID);
-        cliInfo.add(nStop);
-        cliInfo.add(tDiff);
-        new Util().writeObject("/train_tmp/" + trainID, cliInfo);
+        Train t = (Train) new Util().readObject("/train/"+trainID);
+        ArrayList<String> stops = t.getStops();
+        ArrayList<String> times = t.getTimes();
+
+        if (pStop.equals("")) {pStop=t.getPrevStop();}
+        int idx = stops.indexOf(pStop);
+        nStop = stops.get((idx+1) < stops.size() ? idx+1 : idx);
+        tDiff = new TimeHelper().calcTimeDiff(times.get(idx), times.get(stops.indexOf(nStop)));
     }
     
     public String getTrainID() { return trainID; }
@@ -303,7 +285,6 @@ public class TrainLogin extends javax.swing.JFrame {
     private String routeID;
     private String nStop = "";
     private String tDiff = "";
-    private ArrayList<String> cliInfo = new ArrayList<String>();
     
     /**
      * @param args the command line arguments
@@ -359,4 +340,7 @@ public class TrainLogin extends javax.swing.JFrame {
     private javax.swing.JTextField trainIdTextField;
     private javax.swing.JPanel usrPanel;
     // End of variables declaration//GEN-END:variables
+    private String wd = Paths.get("").toAbsolutePath().toString().substring(0, 
+            Paths.get("").toAbsolutePath().toString().indexOf("Tourist-Train-Manage-System"));
+    private String root = wd + "Tourist-Train-Manage-System/project/data";
 }

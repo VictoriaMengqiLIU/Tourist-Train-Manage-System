@@ -3,14 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package group34v2.ui;
+package code.ui;
 
-import group34v2.Checker;
-import group34v2.Driver;
-import group34v2.Route;
-import group34v2.Train;
-import group34v2.Util;
-import java.util.ArrayList;
+import code.Checker;
+import code.Communicator;
 
 /**
  *
@@ -162,23 +158,12 @@ public class AssignTrain extends javax.swing.JFrame {
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
         String tid = tidText.getText();
         String rid = ridText.getText();
-        Checker c1 = new Checker(tid, tid);
-        Checker c2 = new Checker(tid, tid);
+        Checker train = new Checker(tid, new Communicator().getPass(tid));
+        Checker route = new Checker(rid);
         
-        if (c1.isExists() && c2.isExists())
-        {
-            if (!c1.isTrainAssigned() && !c2.isRouteEmpty())
-            {
-                ArrayList<String> stops = new ArrayList<String>();
-                ArrayList<String> times = new ArrayList<String>();
-                
-                Route r = (Route) new Util().readObject("/route/"+rid);
-                stops = r.getStops();
-                times = r.getTimes();
-                
-                Train t = new Train(tid, rid, stops, times, false);
-                new Util().writeObject("/train/" + tid, t);
-
+        if (train.isExists() && route.isRouteInitiated()) {
+            if (!train.isTrainAssigned2Route()) {
+                new Communicator().assignTrain2Route(tid, rid);
                 this.setVisible(false);
                 dispose();
                 new Feedback().setVisible(true);

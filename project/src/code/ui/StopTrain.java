@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package group34v2.ui;
+package code.ui;
 
-import group34v2.Checker;
-import group34v2.Driver;
-import group34v2.Util;
+import code.Checker;
+import code.Communicator;
+import code.Driver;
+import code.Train;
+import code.Util;
 
 /**
  *
@@ -144,27 +146,16 @@ public class StopTrain extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
-        Checker ck = new Checker(idText.getText());
-            if (ck.isTrainAssigned()) {
-                if(ck.isTrainOnDuty()) {
-                    if (ck.isTrainRunning()) {
-                        for (Object obj : new Util().getObj("/driver/"))
-                        {
-                            Driver d = (Driver) obj;
-                            if (d.getTrainID() == idText.getText())
-                            {
-                               d.setState(false);
-                            }
-                        }
-                        this.setVisible(false);
-                        dispose();
-                        new Feedback().setVisible(true);
-                    } else {
-                        feedbackLabel.setText("Train is already stoped!");
-                        idText.setText("");
-                    }
+        String tid = idText.getText();
+        Checker ck = new Checker(tid);
+            if (ck.isTrainAssigned2Route()) {
+                if(ck.isTrainStarted()) {
+                    new Communicator().stopTrain(tid);
+                    this.setVisible(false);
+                    dispose();
+                    new Feedback().setVisible(true);
                 } else {
-                    feedbackLabel.setText("Train haven't started!");
+                    feedbackLabel.setText("Train hasn't been started!");
                     idText.setText("");
                 }
             } else {

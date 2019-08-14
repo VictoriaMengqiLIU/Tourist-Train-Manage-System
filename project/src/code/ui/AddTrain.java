@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package group34v2.ui;
+package code.ui;
 
-import group34v2.Login;
-import group34v2.Util;
+import code.Login;
+import code.Util;
 
 /**
  *

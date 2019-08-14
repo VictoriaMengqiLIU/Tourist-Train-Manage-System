@@ -12,11 +12,13 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/Victoria/NetBeansProjects/Group34/test/CheckerTest.java</file>
-            <file>file:/Users/Victoria/NetBeansProjects/Group34/src/group34v2/ui/About.java</file>
-            <file>file:/Users/Victoria/NetBeansProjects/Group34/src/group34v2/Checker.java</file>
-            <file>file:/Users/Victoria/NetBeansProjects/Group34/src/group34v2/Util.java</file>
-            <file>file:/Users/Victoria/NetBeansProjects/Group34/test/UtilTest.java</file>
+            <file>file:/Users/Victoria/GDrive_gmail/Tourist-Train-Manage-System/project/src/code/Util.java</file>
+            <file>file:/Users/Victoria/GDrive_gmail/Tourist-Train-Manage-System/project/src/code/ui/ControlCenter.java</file>
+            <file>file:/Users/Victoria/GDrive_gmail/Tourist-Train-Manage-System/project/src/code/ui/TrainInfo.java</file>
+            <file>file:/Users/Victoria/GDrive_gmail/Tourist-Train-Manage-System/project/src/code/Train.java</file>
+            <file>file:/Users/Victoria/GDrive_gmail/Tourist-Train-Manage-System/project/src/code/Checker.java</file>
+            <file>file:/Users/Victoria/GDrive_gmail/Tourist-Train-Manage-System/project/src/code/Driver.java</file>
+            <file>file:/Users/Victoria/GDrive_gmail/Tourist-Train-Manage-System/project/src/code/ui/tmp.java</file>
         </group>
     </open-files>
 </project-private>

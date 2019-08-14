@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package group34v2.ui;
+package code.ui;
 
-import group34v2.Checker;
+import code.Checker;
+import code.Communicator;
 import java.io.File;
+import java.nio.file.Paths;
 
 /**
  *
@@ -159,20 +161,36 @@ public class DelTrain extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
-        Checker ck = new Checker(idText.getText(), passText.getText(), 2);
+        String tid = idText.getText();
+        String tpass = passText.getText();
+        Checker ck = new Checker(tid, tpass);
         if (ck.isExists()) {
-            if (!ck.isTrainAssigned()) {
-                new File("./data/login/" + idText.getText() + "/").delete();
+            if (ck.isTrainAssigned2Route()) {
+                if (ck.isTrainDrived()) {
+                    if (ck.isTrainStarted()) {
+                        feedbackLabel.setText("Train is running! You cannot delete it!");
+                        idText.setText("");
+                        passText.setText("");                        
+                    } else {
+                        feedbackLabel.setText("Train is assigned! Delete driver first!");
+                        idText.setText("");
+                        passText.setText("");                        
+                    }
+                } else {
+                    new Communicator().untieTrainRoute(tid);
+                    new File(root+"/login/" + tid).delete();
+                    this.setVisible(false);
+                    dispose();
+                    new Feedback().setVisible(true);
+                }
+            } else {
+                new File(root+"/login/" + tid).delete();
                 this.setVisible(false);
                 dispose();
-                new Feedback().setVisible(true);
-            } else {
-                feedbackLabel.setText("Train is assigned! You cannot delete it!");
-                idText.setText("");
-                passText.setText("");
+                new Feedback().setVisible(true);                
             }
         } else {
-            feedbackLabel.setText("Train does not exist! You cannot delete it!");
+            feedbackLabel.setText("Train does not exist!");
             idText.setText("");
             passText.setText("");
         }
@@ -233,4 +251,7 @@ public class DelTrain extends javax.swing.JFrame {
     private javax.swing.JTextField passText;
     private javax.swing.JButton submitBtn;
     // End of variables declaration//GEN-END:variables
+    private String wd = Paths.get("").toAbsolutePath().toString().substring(0, 
+            Paths.get("").toAbsolutePath().toString().indexOf("Tourist-Train-Manage-System"));
+    private String root = wd + "Tourist-Train-Manage-System/project/data";
 }

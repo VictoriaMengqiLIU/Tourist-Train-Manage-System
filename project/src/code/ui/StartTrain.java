@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package group34v2.ui;
+package code.ui;
 
-import group34v2.Checker;
-import group34v2.Driver;
-import group34v2.Train;
-import group34v2.Util;
+import code.Checker;
+import code.Communicator;
+import code.Driver;
+import code.Train;
+import code.Util;
 
 /**
  *
@@ -145,36 +146,28 @@ public class StartTrain extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
-        String id = idText.getText();
-        Checker ck = new Checker(id);
-        if (ck.isTrainAssigned()) {
-                if(!ck.isTrainOnDuty()){
-                    for (Object obj : new Util().getObj("/driver/"))
-                    {
-                        Driver d = (Driver) obj;
-                        if (d.getTrainID() == id)
-                        {
-                           d.setState(true);
-                        }
-                    }
-                    for (Object obj : new Util().getObj("/train/"))
-                    {
-                        Train t = (Train) obj;
-                        if (t.getTrainID() == id)
-                            t.setState(true);
-                    }
+        String trainID = idText.getText();
+        Checker ck = new Checker(trainID);
+        if (ck.isTrainAssigned2Route()) {
+            if (ck.isTrainDrived()) {
+                if(!ck.isTrainStarted()){
+                    new Communicator().startTrain(trainID);
                     this.setVisible(false);
                     dispose();
                     new Feedback().setVisible(true);
                 }
                 else {
-                    feedbackLabel.setText("Train is already started!");
+                    feedbackLabel.setText("Train has already been started!");
+                    idText.setText("");
                 }
-            
             } else {
-                feedbackLabel.setText("Train is not assigned! You can't start it!");
+                feedbackLabel.setText("Please assign driver before start train!");
                 idText.setText("");
             }
+        } else {
+            feedbackLabel.setText("Please assign train before start it!");
+            idText.setText("");
+        }
     }//GEN-LAST:event_submitBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed

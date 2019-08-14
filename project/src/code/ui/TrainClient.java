@@ -1,7 +1,8 @@
-package group34v2.ui;
+package code.ui;
 
-import group34v2.Util;
+import code.Util;
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /*
@@ -19,8 +20,10 @@ public class TrainClient extends javax.swing.JFrame {
     /**
      * Creates new form TrainClient
      */
-    public TrainClient() {
-        doInBackground();
+    public TrainClient(String trainID, String nStop, String tDiff) {
+        this.trainID = trainID;
+        this.nStop = nStop;
+        this.tDiff = tDiff;
         initComponents();
     }
 
@@ -159,19 +162,6 @@ public class TrainClient extends javax.swing.JFrame {
         this.setVisible(false);
         new TrainLogin().setVisible(true);
     }//GEN-LAST:event_backButton1ActionPerformed
-
-    public void doInBackground()
-    {
-        ArrayList<String> info = new ArrayList<String>();
-        for (Object obj : new Util().getObj("/train_tmp/"))
-        {
-            info = (ArrayList) obj;
-            trainID = info.get(0);
-            nStop = info.get(1);
-            tDiff = info.get(2);
-        }
-        new File("./data/train_tmp/" + trainID).delete();
-    }
     
     public String getTrainID() { return trainID; }
     public String getNextStop() { return nStop; }
@@ -179,46 +169,11 @@ public class TrainClient extends javax.swing.JFrame {
     
     public void setTrainID(String value) { trainID = value; }
     public void setNextStop(String value) { nStop = value; }
-    public void setTimeDiff( String value) { tDiff = value; }
+    public void setTimeDiff(String value) { tDiff = value; }
     
     private String trainID = null;
     private String nStop = null;
     private String tDiff = null;
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TrainClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TrainClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TrainClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TrainClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TrainClient().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
@@ -234,4 +189,7 @@ public class TrainClient extends javax.swing.JFrame {
     private javax.swing.JPanel trainClientPanel1;
     private javax.swing.JLabel trainIdLabel1;
     // End of variables declaration//GEN-END:variables
+    private String wd = Paths.get("").toAbsolutePath().toString().substring(0, 
+            Paths.get("").toAbsolutePath().toString().indexOf("Tourist-Train-Manage-System"));
+    private String root = wd + "Tourist-Train-Manage-System/project/data";
 }
