@@ -10,7 +10,7 @@
 	
 ## How to run the .jar file
 
-You can run the app by simply double-click the `app.jar` file under ./project/dist/ directionary, you can see the app.jar file.
+You can run the app by simply double-click the `TrainManagement.jar` file under ./project/dist/ directionary, you can see the TrainManagement.jar file.
 
 But please don't try to compile it (I mean click it) under other directionary, it won't work. (but you may see some no data UI by doing that)
 
